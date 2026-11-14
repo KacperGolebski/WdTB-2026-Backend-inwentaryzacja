@@ -10,7 +10,8 @@ insert into user_account (email, display_name, role, created_at) values
 -- LAB 01: konta zespołu z adresami testowymi.
 insert into user_account (email, display_name, role, created_at) values
     ('kacper.golebski@example.com', 'Kacper Gołębski', 'USER', current_timestamp),
-    ('tomasz.choragwicki@example.com', 'Tomasz Chorągwicki', 'USER', current_timestamp);
+    ('tomasz.choragwicki@example.com', 'Tomasz Chorągwicki', 'USER', current_timestamp),
+    ('konto-testowe@example.com', 'Konto testowe', 'USER', current_timestamp);
 
 -- ===== LAB 02 · equipment =====
 insert into equipment (inventory_number, name, serial_number, status, building, room) values
