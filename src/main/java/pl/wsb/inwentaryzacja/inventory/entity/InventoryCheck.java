@@ -1,5 +1,6 @@
 package pl.wsb.inwentaryzacja.inventory.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,10 +9,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import pl.wsb.inwentaryzacja.employee.entity.Employee;
+import pl.wsb.inwentaryzacja.equipment.entity.Equipment;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name = "inventory_check")
@@ -30,27 +36,27 @@ public class InventoryCheck {
     @Column(name = "checked_on", nullable = false)
     private LocalDate checkedOn;
 
-    @Column(name = "checked_item_count", nullable = false)
-    private int checkedItemCount;
-
-    @Column(name = "discrepancy_count", nullable = false)
-    private int discrepancyCount;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee checkedBy;
 
+    @OneToMany(mappedBy = "inventoryCheck", cascade = CascadeType.PERSIST)
+    private List<InventoryCheckItem> items = new ArrayList<>();
+
     protected InventoryCheck() {
     }
 
-    public InventoryCheck(String referenceNumber, String scope, LocalDate checkedOn,
-                          int checkedItemCount, int discrepancyCount, Employee checkedBy) {
+    public InventoryCheck(String referenceNumber, String scope, LocalDate checkedOn, Employee checkedBy) {
         this.referenceNumber = referenceNumber;
         this.scope = scope;
         this.checkedOn = checkedOn;
-        this.checkedItemCount = checkedItemCount;
-        this.discrepancyCount = discrepancyCount;
         this.checkedBy = checkedBy;
+    }
+
+    public InventoryCheckItem addItem(Equipment equipment, CheckResult result, String note) {
+        InventoryCheckItem item = new InventoryCheckItem(this, equipment, result, note);
+        items.add(item);
+        return item;
     }
 
     public Long getId() {
@@ -69,15 +75,19 @@ public class InventoryCheck {
         return checkedOn;
     }
 
+    public Employee getCheckedBy() {
+        return checkedBy;
+    }
+
+    public List<InventoryCheckItem> getItems() {
+        return Collections.unmodifiableList(items);
+    }
+
     public int getCheckedItemCount() {
-        return checkedItemCount;
+        return items.size();
     }
 
     public int getDiscrepancyCount() {
-        return discrepancyCount;
-    }
-
-    public Employee getCheckedBy() {
-        return checkedBy;
+        return Math.toIntExact(items.stream().filter(item -> item.getResult() != CheckResult.CONFIRMED).count());
     }
 }

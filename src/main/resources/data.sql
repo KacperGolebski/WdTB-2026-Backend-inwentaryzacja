@@ -30,10 +30,10 @@ insert into employee (employee_number, full_name, work_email, department, user_a
     ('EMP-003', 'Marta Kowalczyk', 'marta.kowalczyk@example.com', 'Księgowość', null);
 
 -- ===== LAB 02 · inventory_check =====
-insert into inventory_check (reference_number, scope, checked_on, checked_item_count, discrepancy_count, employee_id) values
-    ('INV-2026-001', 'Laptopy w biurze głównym', '2026-10-21', 18, 0, 2),
-    ('INV-2026-002', 'Monitory w magazynie IT', '2026-10-28', 12, 1, 1),
-    ('INV-2026-003', 'Drukarki w budynku technicznym', '2026-11-06', 7, 0, 2);
+insert into inventory_check (reference_number, scope, checked_on, employee_id) values
+    ('INV-2026-001', 'Stanowisko A-204 i magazyn IT', '2026-10-21', 2),
+    ('INV-2026-002', 'Monitory w magazynie IT', '2026-10-28', 1),
+    ('INV-2026-003', 'Drukarki w budynku technicznym', '2026-11-06', 2);
 
 -- ===== LAB 03 · equipment_assignment =====
 -- Po zwrocie tego samego laptopa można wydać kolejnej osobie.
@@ -41,3 +41,10 @@ insert into equipment_assignment (equipment_id, employee_id, assigned_on, return
     (1, 2, '2026-09-01', '2026-10-01'),
     (2, 1, '2026-09-14', '2026-10-12'),
     (1, 1, '2026-10-05', null);
+
+-- ===== LAB 03 · inventory_check_item =====
+insert into inventory_check_item (inventory_check_id, equipment_id, result, note) values
+    (1, 1, 'CONFIRMED', 'Laptop na stanowisku A-204.'),
+    (1, 2, 'CONFIRMED', 'Monitor w magazynie IT.'),
+    (2, 2, 'WRONG_LOCATION', 'Monitor znaleziono w A-105 i odstawiono do magazynu IT.'),
+    (3, 3, 'CONFIRMED', 'Drukarka znajduje się w serwisie.');
