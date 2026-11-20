@@ -26,7 +26,7 @@ insert into employee (employee_number, full_name, work_email, department) values
     ('EMP-003', 'Marta Kowalczyk', 'marta.kowalczyk@example.com', 'Księgowość');
 
 -- ===== LAB 02 · inventory_check =====
-insert into inventory_check (reference_number, scope, checked_on, checked_item_count, discrepancy_count) values
-    ('INV-2026-001', 'Laptopy w biurze głównym', '2026-10-21', 18, 0),
-    ('INV-2026-002', 'Monitory w magazynie IT', '2026-10-28', 12, 1),
-    ('INV-2026-003', 'Drukarki w budynku technicznym', '2026-11-06', 7, 0);
+insert into inventory_check (reference_number, scope, checked_on, checked_item_count, discrepancy_count, employee_id) values
+    ('INV-2026-001', 'Laptopy w biurze głównym', '2026-10-21', 18, 0, 2),
+    ('INV-2026-002', 'Monitory w magazynie IT', '2026-10-28', 12, 1, 1),
+    ('INV-2026-003', 'Drukarki w budynku technicznym', '2026-11-06', 7, 0, 2);
