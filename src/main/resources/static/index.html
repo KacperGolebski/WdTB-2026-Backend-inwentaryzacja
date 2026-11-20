@@ -57,13 +57,15 @@
     <ul>
       <li><b>LAB 01:</b> Zmieniono: nazwa projektu, konta zespołu, wizytówka</li>
       <li><b>LAB 02:</b> Dodano tabele <code>equipment</code> (sprzęt), <code>employee</code> (pracownicy) i <code>inventory_check</code> (inwentaryzacje) oraz dane startowe.</li>
+      <li><b>LAB 03:</b> Powiązano spisy z osobami prowadzącymi kontrolę sprzętu i zapisano wynik kontroli każdego urządzenia.
+        Dodano historię wydań i zwrotów, opcjonalne konto pracownika oraz zapytanie o jego aktualnie wydany sprzęt.</li>
     </ul>
     <p class="muted">Na kolejnych laboratoriach dopisujcie tu kolejne punkty.</p>
   </section>
 
   <section class="card">
     <h2>1. Zajrzyjcie do bazy danych</h2>
-    <p>Aplikacja ma wbudowaną bazę H2. Na start jest w niej jedna tabela, <code>user_account</code>, z kontami z pliku <code>data.sql</code>.</p>
+    <p>Aplikacja ma wbudowaną bazę H2. Dane z pliku <code>data.sql</code> obejmują konta, pracowników, sprzęt, historię wydań, spisy i ich pozycje.</p>
     <table>
       <tr><td>JDBC URL</td><td><code>jdbc:h2:file:./data/wdtb</code></td></tr>
       <tr><td>Użytkownik</td><td><code>sa</code></td></tr>
