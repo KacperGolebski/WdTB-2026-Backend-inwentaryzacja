@@ -13,6 +13,10 @@ insert into user_account (email, display_name, role, created_at) values
     ('tomasz.choragwicki@example.com', 'Tomasz Chorągwicki', 'USER', current_timestamp),
     ('konto-testowe@example.com', 'Konto testowe', 'USER', current_timestamp);
 
+-- Konto pracownika działu IT. Po siedmiu wcześniejszych kontach otrzymuje id = 8.
+insert into user_account (email, display_name, role, created_at) values
+    ('piotr.zielinski@example.com', 'Piotr Zieliński', 'USER', current_timestamp);
+
 -- ===== LAB 02 · equipment =====
 insert into equipment (inventory_number, name, serial_number, status, building, room) values
     ('EQ-001', 'Laptop Dell Latitude 5450', 'DL-5450-001', 'ASSIGNED', 'Biuro główne', 'A-204'),
@@ -20,10 +24,10 @@ insert into equipment (inventory_number, name, serial_number, status, building, 
     ('EQ-003', 'Drukarka Brother HL-L5210DW', 'BR-L5210-003', 'IN_REPAIR', 'Budynek techniczny', 'Serwis');
 
 -- ===== LAB 02 · employee =====
-insert into employee (employee_number, full_name, work_email, department) values
-    ('EMP-001', 'Anna Nowak', 'anna.nowak@example.com', 'Administracja'),
-    ('EMP-002', 'Piotr Zieliński', 'piotr.zielinski@example.com', 'IT'),
-    ('EMP-003', 'Marta Kowalczyk', 'marta.kowalczyk@example.com', 'Księgowość');
+insert into employee (employee_number, full_name, work_email, department, user_account_id) values
+    ('EMP-001', 'Anna Nowak', 'anna.nowak@example.com', 'Administracja', null),
+    ('EMP-002', 'Piotr Zieliński', 'piotr.zielinski@example.com', 'IT', 8),
+    ('EMP-003', 'Marta Kowalczyk', 'marta.kowalczyk@example.com', 'Księgowość', null);
 
 -- ===== LAB 02 · inventory_check =====
 insert into inventory_check (reference_number, scope, checked_on, checked_item_count, discrepancy_count, employee_id) values
