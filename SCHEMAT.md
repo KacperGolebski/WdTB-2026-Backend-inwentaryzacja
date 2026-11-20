@@ -2,12 +2,13 @@
 
 Plik generują reguły projektu (panel Maven → Lifecycle → verify). Nie edytujcie go ręcznie.
 
-Tabele: 4 · kolumny: 25 · relacje: 1 × @ManyToOne, 0 × @OneToMany, 1 × @OneToOne, 0 × @ManyToMany
+Tabele: 5 · kolumny: 30 · relacje: 3 × @ManyToOne, 0 × @OneToMany, 1 × @OneToOne, 0 × @ManyToMany
 
 | Tabela | Encja | Kolumny | Klucze obce |
 |---|---|---|---|
 | employee | Employee | 6 | user_account_id |
 | equipment | Equipment | 7 | — |
+| equipment_assignment | EquipmentAssignment | 5 | employee_id, equipment_id |
 | inventory_check | InventoryCheck | 7 | employee_id |
 | user_account | UserAccount | 5 | — |
 
@@ -30,6 +31,13 @@ erDiagram
         String serial_number
         EquipmentStatus status
     }
+    equipment_assignment {
+        Long id PK
+        LocalDate assigned_on
+        Long employee_id FK
+        Long equipment_id FK
+        LocalDate returned_on
+    }
     inventory_check {
         Long id PK
         int checked_item_count
@@ -46,6 +54,8 @@ erDiagram
         String email
         AccountRole role
     }
+    employee ||--o{ equipment_assignment : "employee_id"
     employee ||--o{ inventory_check : "employee_id"
+    equipment ||--o{ equipment_assignment : "equipment_id"
     user_account |o--o| employee : "user_account_id"
 ```
